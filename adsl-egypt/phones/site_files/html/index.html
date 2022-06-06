@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+    <head x-import="phones/head.html"> </head>
+    <body ng-controller="phoneNumberController">
+        <nav x-import="phones/sitebar.html" class="sitebar" data-ng-controller="sitebar"></nav>
+        <div x-import="phones/modal/add.html"></div>
+        <div x-import="phones/modal/setting.html"></div>
+        <div class="main-layout" x-permissions="login">
+
+            <i-button type="bg-blue white" label="Load Phones Numbers" ng-click="loadPhoneList()" ></i-button>
+
+            <table class="table phones hover">
+                <tr>
+                    <th class="center provider">
+                        Phones <a class="btn bg-green white" onclick="site.showModal('#newPhoneModal')"> <i class="fas fa-plus-circle font-14"></i> New </a>
+                    </th>
+                    <th class="center provider red" ng-show="setting.vodafone.enabled">
+                        <div class="row">
+                            <div class="col-2"><img src="/phones-images/vodafone.png" alt="" /></div>
+                            <div class="col-5 pointer" ng-click="vodafoneOpen()">Vodafone</div>
+                            <div class="col-5">
+                                <img ng-show="vodafoneLogedBusy" src="/phones-images/loading.gif" alt="" />
+                                <i-button class="right" type="bg-green white" label="Login" ng-click="vodafoneLogin()" ng-hide="vodafoneLoged"></i-button>
+                                <a ng-click="vodafoneCheckAll()" class="btn bg-red white"><i class="fas fa-sync"></i></a>
+                            </div>
+                        </div>
+                    </th>
+                    <th class="center provider green" ng-show="setting.etisalat.enabled">
+                        <div class="row">
+                            <div class="col-2"><img src="/phones-images/etisalat.jpg" alt="" /></div>
+                            <div class="col-5">Etisalat</div>
+                            <div class="col-5">
+                                <img ng-show="etisalatLogedBusy" src="/phones-images/loading.gif" alt="" />
+                                <i-button class="right" type="bg-green white" label="Login" ng-click="etisalatLogin()" ng-hide="etisalatLoged"></i-button>
+                            </div>
+                        </div>
+                    </th>
+                    <th class="center provider orange">
+                        <div class="row">
+                            <div class="col-2"><img src="/phones-images/orange.png" alt="" /></div>
+                            <div class="col-5">Orange</div>
+                            <div class="col-5"><i-button class="right" type="bg-green white" label="Login" ng-click="orangeLogin()" ng-hide="orangeLoged"></i-button></div>
+                        </div>
+                    </th>
+                    <th class="center provider blue">
+                        <div class="row">
+                            <div class="col-2"><img src="/phones-images/we.png" alt="" /></div>
+                            <div class="col-5">We</div>
+                            <div class="col-5"><i-button class="right" type="bg-green white" label="Login" ng-click="weLogin()" ng-hide="weLoged"></i-button></div>
+                        </div>
+                    </th>
+                    <th class="center provider">
+                        <div class="row">
+                            <div class="col-2"><img src="/phones-images/bill.jpg" alt="" /></div>
+                            <div class="col-5">bill</div>
+                            <div class="col-5"><i-button class="right" type="bg-green white" label="Login" ng-click="google()" ng-hide="billLoged"></i-button></div>
+                        </div>
+                    </th>
+                </tr>
+
+                <tr ng-repeat="p in phoneList">
+                    <td>
+                        <i-button type="default delete red" ng-click="deletePhone(p)"></i-button> ({{$index+1}}) <span class="bold blue font-18"> {{p.govCode }}</span>
+                        <span class="bold font-18">{{p.number }}</span>
+                    </td>
+                    <td class="center" ng-show="setting.vodafone.enabled">
+                        <span class="blue"> {{p.vodafone.status}} </span>
+                        <a ng-click="vodafoneCheck(p)" class="btn bg-red white"><i class="fas fa-sync"></i></a>
+                        <p class="bold red">{{p.vodafone.error}}</p>
+                    </td>
+                    <td class="center" ng-show="setting.etisalat.enabled">
+                        <a class="btn bg-green white"><i class="fas fa-sync"></i></a>
+                    </td>
+                    <td class="center">
+                        <a class="btn bg-orange white"><i class="fas fa-sync"></i></a>
+                    </td>
+                    <td class="center">
+                        <a class="btn bg-blue white"><i class="fas fa-sync"></i></a>
+                    </td>
+                    <td class="center">
+                        <a class="btn bg-black white"><i class="fas fa-sync"></i></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div x-permission="!login" x-import="phones/modal/login.html"></div>
+        <div x-permission="login" x-import="phones/modal/logout.html"></div>
+
+        <script src="/x-js/all.js"></script>
+        <script x-import="phones/sitebar.js"></script>
+        <script x-import="phones/index.js"></script>
+    </body>
+</html>

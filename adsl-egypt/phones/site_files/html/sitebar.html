@@ -1,0 +1,23 @@
+<h2 class="brand">
+    <div class="row">
+        <div class="inline title" help-id="brand_title">
+            <a href="/"> ##word.site_title## </a>
+        </div>
+
+        <div class="info">
+            <a x-features="login" href="#" onclick="event.stopPropagation(); $('.user-menu').toggle()">
+                <p class="center"><i class="fas fa-user-circle"></i> <span class="bold"> ##user.email##</span></p>
+            </a>
+            <a x-features="!login" id="btn_login" ng-click="login()"> ##word.security_login## </a>
+        </div>
+
+        <div class="user-menu">
+            <div class="center profile">
+                <a class="btn bg-black white font-16" onclick="site.showModal('#settingModal')"> <i class="fas fa-cog font-14"></i> Setting </a>
+
+                <br />
+                <div class="link" ng-click="logout()">##word.security_logout##</div>
+            </div>
+        </div>
+    </div>
+</h2>

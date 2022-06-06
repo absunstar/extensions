@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Akwam Site Manager</title>
+        <link rel="stylesheet" href="/x-css/all.css" />
+        <style>
+            :root {
+                --navbar-background-color: #3fb58f;
+            }
+        </style>
+    </head>
+    <body ng-controller="main">
+        <i-button label="Start Scrap" ng-click="scrap()"></i-button>
+        <table class="table">
+            <tr>
+                <th>Logo</th>
+                <th>Title</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <script src="/x-js/all.js"></script>
+
+        <script>
+            SOCIALBROWSER.fs = SOCIALBROWSER.require('fs');
+            app.controller('main', ($scope, $http) => {
+                $scope.pid = process.pid;
+                $http({
+                    method: 'get',
+                    url: 'http://127.0.0.1:60080/extentions/akwam/api/info',
+                }).then((res) => {
+                  $scope.dir = res.data.dir
+                });
+                $scope.scrap = function () {
+                    let win = new SOCIALBROWSER.remote.BrowserWindow({
+                        show: true,
+                        alwaysOnTop: true,
+                        skipTaskbar: false,
+                        resizable: true,
+                        width: 800,
+                        height: 600,
+                        backgroundColor: '#ffffff',
+                        frame: true,
+                        fullscreenable: false,
+                        title: 'Akwam',
+                        icon: SOCIALBROWSER.var.core.icon,
+                        parent2: SOCIALBROWSER.currentWindow,
+                        webPreferences: { ...SOCIALBROWSER.webPreferences, nodeIntegration: false, nodeIntegrationInWorker: false, webaudio: false },
+                    });
+                    win.$setting = win.$setting || {};
+                    win.$setting.webPreferences = SOCIALBROWSER.webPreferences;
+                    win.center();
+                    win.setMenuBarVisibility(false);
+
+                    SOCIALBROWSER.call('[assign][window]', {
+                        parent_id: SOCIALBROWSER.currentWindow.id,
+                        child_id: win.id,
+                    });
+
+                    let path = $scope.dir + '/scrap.js';
+                    let code_injected = SOCIALBROWSER.fs.readFileSync(path).toString('utf8');
+                    SOCIALBROWSER.call('[set][window][setting]', {
+                        win_id: win.id,
+                        name: 'eval',
+                        code: code_injected,
+                    });
+
+                    win.loadURL('https://akwam.im/movies', {
+                        referrer: 'https://akwam.im/movies',
+                    });
+
+                    /*SOCIALBROWSER.call('window.message', { child_id: win.id, data: 'xxxxx', origin: '*' });*/
+                };
+            });
+        </script>
+    </body>
+</html>

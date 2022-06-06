@@ -1,0 +1,31 @@
+<div id="newPhoneModal" class="modal small fade" tabindex="-1" role="dialog" fixed>
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2 class="text-center"><i class="fa fa-sign-in"></i> New Phone</h2>
+        </div>
+
+        <div class="modal-body">
+            <h1 ng-show="busy" class="center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></h1>
+
+            <form ng-hide="busy">
+                <i-control label="Gov Code" ng-model="phone.govCode"></i-control>
+                <i-control label="Phone Number" ng-model="phone.number"></i-control>
+            </form>
+
+            <div class="row">
+                <form class="form text-center pointer">
+                    <input id="input_xlsx" class="hidden" type="file" name="xlsxFile" ng-model="uploadForm.path" />
+                    <i-button class='right' fa="cloud-upload-alt" ng-click="tryImport(uploadForm)" label="Import"></i-button>
+                    <p class="bold green">{{uploadForm.uploadStatus}}</p>
+                </form>
+            </div>
+
+            <p class="red bold center">{{error}}</p>
+        </div>
+        <div class="modal-footer center">
+            <a ng-hide="busy" id="loginBtn" ng-click="addPhone(phone)" class="btn bg-green white"> <i class="fa fa-sign-in" aria-hidden="true"></i> Add </a>
+            <a class="btn bg-blue white" onclick="site.hideModal('#newPhoneModal')"> <i class="fa fa-times" aria-hidden="true"></i> Close </a>
+        </div>
+    </div>
+</div>

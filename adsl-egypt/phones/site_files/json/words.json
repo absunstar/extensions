@@ -1,0 +1,21 @@
+[
+    {
+        "name" : "site_title",
+        "en" : "Phones Manager",
+        "ar" : "Phones Manager"
+    },  {
+        "name" : "security_login",
+        "en" : "Login",
+        "ar" : "Login"
+    },  {
+        "name" : "security_register",
+        "en" : "Register",
+        "ar" : "Register"
+    },  {
+        "name" : "security_logout",
+        "en" : "Logout",
+        "ar" : "Logout"
+    }
+
+    
+]

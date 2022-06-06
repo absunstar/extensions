@@ -1,0 +1,77 @@
+<div id="settingModal" class="modal small fade" tabindex="-1" role="dialog" fixed>
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2 class="text-center"><i class="fa fa-sign-in"></i> Setting</h2>
+        </div>
+
+        <div class="modal-body">
+            <h1 ng-show="busy" class="center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></h1>
+
+            <fieldset>
+                <legend>Vodafone</legend>
+                <form ng-hide="busy">
+                    <div class="row">
+                        <i-checkbox label="Enabled" ng-model="setting.vodafone.enabled"></i-checkbox>
+                        <i-checkbox label="Auot Login" ng-model="setting.vodafone.autoLogin"></i-checkbox>
+                        <i-checkbox label="work in Background" ng-model="setting.vodafone.hideMode"></i-checkbox>
+                        <i-checkbox label="API Enabled" ng-model="setting.vodafone.enabledApi"></i-checkbox>
+                        <i-control label="Login URL" ng-model="setting.vodafone.loginURL"></i-control>
+                        <i-control label="Loged URL" ng-model="setting.vodafone.logedURL"></i-control>
+                        <i-control label="Entry API URL" ng-model="setting.vodafone.entryApiURL"></i-control>
+                        <i-control label="Check API URL" ng-model="setting.vodafone.checkApiURL"></i-control>
+                        <div class="row">
+                            <div class="col6">
+                                <i-control label="User Name" ng-model="setting.vodafone.username"></i-control>
+                                <i-control label="Password" ng-model="setting.vodafone.password"></i-control>
+                                <i-control label="Company PIN" ng-model="setting.vodafone.pin"></i-control>
+                            </div>
+                            <div class="col6">
+                                <i-control label="User Name Selector" ng-model="setting.vodafone.usernameSelector"></i-control>
+                                <i-control label="Password Selector" ng-model="setting.vodafone.passwordSelector"></i-control>
+                                <i-control label="Company PIN Selector" ng-model="setting.vodafone.pinSelector"></i-control>
+                                <i-control label="Login Button" ng-model="setting.vodafone.loginButtonSelector"></i-control>
+                                <i-control label="Gov Code Selector" ng-model="setting.vodafone.GovCodeSelector"></i-control>
+                                <i-control label="Phone Selector" ng-model="setting.vodafone.PhoneSelector"></i-control>
+                                <i-control label="Next Button Selector" ng-model="setting.vodafone.NextButtonSelector"></i-control>
+                                <i-control label="First Fail Selector" ng-model="setting.vodafone.FirstFailSelector"></i-control>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </fieldset>
+
+            <fieldset>
+                <legend>Etisalat</legend>
+                <form ng-hide="busy">
+                    <div class="row">
+                        <i-checkbox label="Enabled" ng-model="setting.etisalat.enabled"></i-checkbox>
+                        <i-checkbox label="Auot Login" ng-model="setting.etisalat.autoLogin"></i-checkbox>
+                        <i-checkbox label="work in Background" ng-model="setting.etisalat.hideMode"></i-checkbox>
+                        <i-control label="Login URL" ng-model="setting.etisalat.loginURL"></i-control>
+                        <div class="row">
+                            <div class="col6">
+                                <i-control label="User Name" ng-model="setting.etisalat.username"></i-control>
+                                <i-control label="Password" ng-model="setting.etisalat.password"></i-control>
+                            </div>
+                            <div class="col6">
+                                <i-control label="User Name Selector" ng-model="setting.etisalat.usernameSelector"></i-control>
+                                <i-control label="Password Selector" ng-model="setting.etisalat.passwordSelector"></i-control>
+                                <i-control label="Login Button" ng-model="setting.etisalat.loginButtonSelector"></i-control>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row padding border">
+                        <i-control label="Search URL" ng-model="setting.etisalat.searchURL"></i-control>
+                    </div>
+                </form>
+            </fieldset>
+
+            <p class="red bold center">{{error}}</p>
+        </div>
+        <div class="modal-footer center">
+            <a ng-hide="busy" ng-click="saveSetting()" class="btn bg-blue white"> <i class="fa fa-save" aria-hidden="true"></i> Save </a>
+            <a class="btn bg-white bg-black" onclick="site.hideModal('#settingModal')"> <i class="fa fa-times" aria-hidden="true"></i> Close </a>
+        </div>
+    </div>
+</div>
